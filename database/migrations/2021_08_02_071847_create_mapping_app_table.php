@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormTable extends Migration
+class CreateMappingAppTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateFormTable extends Migration
      */
     public function up()
     {
-        Schema::create('form', function (Blueprint $table) {
+        Schema::create('mapping_app', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('name');
-            $table->integer('nik');
-            $table->integer('region_id');
-            $table->integer('departemen_id');
+            $table->unsignedBigInteger('role_id');
+            $table->integer('position');
             $table->timestamps();
+
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
@@ -31,6 +30,6 @@ class CreateFormTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form');
+        Schema::dropIfExists('mapping_app');
     }
 }

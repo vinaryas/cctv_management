@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
+    use LaratrustUserTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -42,4 +44,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopegetUserRole($query)
+    {
+        return $query->join('role_user', 'users.id', '=', 'role_user.user_id')
+                     ->join('roles', 'role_user.role_id', '=', 'roles.id')
+                     ->select('users.id', 'users.name', 'users.username', 'users.email', 'roles.name as rolename');
+    }
+
+    public function RoleUser()
+    {
+        return $this->hasOne(RoleUser::class, 'user_id', 'id');
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class,'id', 'role_id' );
+    }
 }

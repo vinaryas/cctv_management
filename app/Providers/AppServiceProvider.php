@@ -29,12 +29,14 @@ class AppServiceProvider extends ServiceProvider
             $event->menu->add([
                 'text' => 'Dashboard',
                 'url' => route('home'),
+                'active' => [route('home')],
                 'icon' => 'fas fa-home',
             ]);
 
             $event->menu->add([
                 'text' => 'Form',
                 'url' => route('form.index'),
+                'active' => [route('form.index')],
                 'icon' => 'fab fa-wpforms',
             ]);
         });

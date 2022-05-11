@@ -10,28 +10,38 @@
 <form class="card" action="{{ route('form.store') }}" method="POST">
     {{ csrf_field() }}
     <div class="card-body">
-        <div class="card-header">
+        <div class ="card-header">
             <label>Tempat CCTV</label>
+            @foreach ( $place as $places)
             <div class="row">
-                @foreach ( $place as $places)
-                    <div class='col-md-2'>
-                        <input class="checkbox" type="checkbox" name="place_id[]" id="place_id" value="{{ $places->id }}">
-                        <label class="checkbox">{{ $places->place }}</label>
+                <div class="card-body">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="place_id[]" id="place_id" value="{{ $places->id }}">
+                        <label class="form-check-label" >{{ $places->place }}</label>
                     </div>
-                        @if ($places->id == 1)
-                        <select name="area_id" id="area_id" class="form-control" aria-label="Text input with checkbox">
-                            <option> Kode Toko </option>
+                    @if ($places->id == 1)
+                    <div class="col-md-6">
+                        <select name="area_id[]" id="area_id" class="form-control form-control-sm">
                             @foreach ($store as $stores)
                             <option value="{{ $stores->id }}">{{ $stores->name }}</option>
                             @endforeach
                         </select>
-                        <input type="text" name="cctv_id" id="cctv_id" class="form-control" aria-label="Text input with checkbox" placeholder="Area CCTV">
-                        @else
-                        <input type="text" name="area_id" id="area_id" class="form-control" aria-label="Text input with checkbox" placeholder="Daerah Kantor">
-                        <input type="text" name="cctv_id" id="cctv_id" class="form-control" aria-label="Text input with checkbox" placeholder="Area CCTV">
-                        @endif
-                @endforeach
+                    </div>
+                    @else
+                    <div class="col-md-6">
+                        <select name="area_id[]" id="area_id" class="form-control form-control-sm">
+                            @foreach ($areaKantor as $kantor)
+                            <option value="{{ $kantor->id }}">{{ $kantor->area }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @endif
+                </div>
             </div>
+            @endforeach
+            <br>
+            <label> Area CCTV </label>
+            <input type="text" name="tempat_cctv" id="tempat_cctv" class="form-control form-control-sm" placeholder="Area CCTV">
         </div>
         <div class="form-group row">
             <label>Name</label>
