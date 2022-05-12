@@ -39,6 +39,19 @@ class AppServiceProvider extends ServiceProvider
                 'active' => [route('form.index')],
                 'icon' => 'fab fa-wpforms',
             ]);
+
+            $event->menu->add([
+                'text' => 'Manajemen Otorisasi',
+                'icon' => 'fas fa-user-shield',
+                'submenu' => [
+                    [
+                        'text' => 'Role',
+                        'url' => route('role.index'),
+                        'active' => [route('role.index')],
+                        'icon' => 'fab fa-wpforms',
+                    ]
+                ]
+            ]);
         });
 
     }

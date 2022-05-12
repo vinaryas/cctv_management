@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="card-body">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="place_id[]" id="place_id" value="{{ $places->id }}">
+                        <input class="form-check-input" type="radio" name="place_id[]" id="place_id" value="{{ $places->id }}">
                         <label class="form-check-label" >{{ $places->place }}</label>
                     </div>
                     @if ($places->id == 1)
@@ -29,7 +29,7 @@
                     </div>
                     @else
                     <div class="col-md-6">
-                        <select name="area_id[]" id="area_id" class="form-control form-control-sm">
+                        <select name="area_id[] " id="area_id" class="form-control form-control-sm">
                             @foreach ($areaKantor as $kantor)
                             <option value="{{ $kantor->id }}">{{ $kantor->area }}</option>
                             @endforeach

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class formController extends Controller
 {
     public function index(){
-        $user = userService::getAuthUserId(Auth::User()->id)->first();
+        $user = userService::getUserById(Auth::User()->id)->first();
         $region = regionService::all()->get();
         $departemen = departemenService::all()->get();
         $place = placeService::all()->get();
@@ -41,7 +41,7 @@ class formController extends Controller
     public function store(Request $request){
 
         DB::beginTransaction();
-        $user = userService::getAuthUserId(auth::user()->role_id)->first();
+        $user = userService::getUserById(auth::user()->role_id)->first();
 
         try{
             $index = 0;
@@ -65,12 +65,13 @@ class formController extends Controller
                     'area_id'=>$area,
                     'tempat_cctv'=>$request->tempat_cctv,
                     'description'=>$request->description,
-                    'role_last_app'=>Auth::user()->role_id,
-                    'role_next_app'=>formService::getNextApp($request->place_id[0], $user->role_id, $storeForm->region_id),
+                    'role_last_app' => Auth::user()->roles->first()->id,
+                    'role_next_app'=>formService::getNextApp( Auth::user()->roles->first()->id),
                     'status'=>0,
                     'created_by'=>Auth::user()->id,
                 ];
 
+                dd($data);
                 $storeData = form_placeService::store($data);
 
                 $index++;

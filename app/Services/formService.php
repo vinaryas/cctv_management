@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\form;
+use App\Services\Supports\MappingApprovalService;
 
 class formService
 {
@@ -21,6 +22,15 @@ class formService
     public function store($data)
     {
         return $this->form->create($data);
+    }
+
+    public function getNextApp($lastRole)
+    {
+        $thisPosition = MappingApprovalService::getByBapTypeRoleId($lastRole)->first()->position;
+
+        $nextPosition = MappingApprovalService::getByPosition($thisPosition + 1)->first();
+
+        return ($nextPosition != null) ? $nextPosition->role_id : 0;
     }
 
 }

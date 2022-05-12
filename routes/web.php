@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\formController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\role_userController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/form', [formController::class, 'index'])->name('form.index');
 Route::post('/form/store', [formController::class, 'store'])->name('form.store');
+
+Route::get('/role', [role_userController::class, 'index'])->name('role.index');
+Route::get('/role/user/{id}', [role_userController::class, 'create'])->name('role.create');
+Route::post('/role/user}', [role_userController::class, 'store'])->name('role.store');

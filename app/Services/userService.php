@@ -18,11 +18,8 @@ class userService
 		return $this->User->query();
 	}
 
-    public function getAuthUserId($id)
+    public function getUserById($id)
     {
-        return $this->User
-        // ->find($id);
-        ->where('id', $id);
+        return $this->User->where('id', $id);
     }
-
 }
