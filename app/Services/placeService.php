@@ -18,4 +18,9 @@ class placeService
 		return $this->place->query();
 	}
 
+    public function getPlaceId($id)
+    {
+        return $this->place->where('id', $id);
+    }
+
 }

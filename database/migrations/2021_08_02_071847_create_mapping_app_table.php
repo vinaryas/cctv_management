@@ -16,10 +16,12 @@ class CreateMappingAppTable extends Migration
         Schema::create('mapping_app', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('departemen_id')->nullable();
             $table->integer('position');
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('departemen_id')->references('id')->on('departemens');
         });
     }
 

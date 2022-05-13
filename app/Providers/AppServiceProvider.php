@@ -34,13 +34,6 @@ class AppServiceProvider extends ServiceProvider
             ]);
 
             $event->menu->add([
-                'text' => 'Form',
-                'url' => route('form.index'),
-                'active' => [route('form.index')],
-                'icon' => 'fab fa-wpforms',
-            ]);
-
-            $event->menu->add([
                 'text' => 'Manajemen Otorisasi',
                 'icon' => 'fas fa-user-shield',
                 'submenu' => [
@@ -48,10 +41,25 @@ class AppServiceProvider extends ServiceProvider
                         'text' => 'Role',
                         'url' => route('role.index'),
                         'active' => [route('role.index')],
-                        'icon' => 'fab fa-wpforms',
+                        'icon' => 'fas fa-bullseye',
                     ]
                 ]
             ]);
+
+            $event->menu->add([
+                'text' => 'Form',
+                'url' => route('form.index'),
+                'active' => [route('form.index')],
+                'icon' => 'fab fa-wpforms',
+            ]);
+
+            $event->menu->add([
+                'text' => 'Approval',
+                'url' => route('approval.index'),
+                'active' => [route('approval.index')],
+                'icon' => 'fab fa-wpforms',
+            ]);
+
         });
 
     }
