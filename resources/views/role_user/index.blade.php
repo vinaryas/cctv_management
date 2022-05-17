@@ -9,13 +9,14 @@
 @section('content')
 <form class="card" action="{{ route('role.index') }}" method="GET">
     {{ csrf_field() }}
-     <div class="card-body">
+    <div class="card-body">
         <table class="table table-bordered table-striped" id="table" style="width: 100%;">
             <thead>
                 <tr>
                     <th> Nik </th>
                     <th> Name </th>
                     <th> Email </th>
+                    <th> </th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +30,6 @@
                 @endforeach
             </tbody>
         </table>
-        <br>
     </div>
 </form>
 
@@ -43,3 +43,4 @@
         });
     </script>
 @stop
+

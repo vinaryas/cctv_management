@@ -55,6 +55,7 @@ class formService
             'form.time_first as time_first',
             'form.time_last as time_last',
             'form.created_by as created_by',
+            'form.created_at as created_at',
             'departemens.id as departemen_id',
             'departemens.name as departemens_name',
             'place.place as place',
@@ -66,6 +67,11 @@ class formService
         return $data;
     }
 
+    public function getFormByUserId($userId)
+    {
+        return $this->getDetail()->where('created_by', $userId);
+    }
+
     public function getFormById($formId)
     {
         return $this->getDetail()->where('form.id', $formId);
@@ -74,5 +80,23 @@ class formService
     public function update($data, $formId)
     {
         return $this->getDetail()->where('form.id', $formId)->update($data);
+    }
+
+    public function getApproval($roleId)
+    {
+        $form = $this->getDetail()
+        ->where('role_next_app', $roleId)
+        ->where('status', 0);
+
+        return $form;
+    }
+
+    public function getApprovalForIt()
+    {
+        $form = $this->getDetail()
+        ->where('role_next_app', 6)
+        ->where('status', 0);
+
+        return $form;
     }
 }

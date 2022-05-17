@@ -19,8 +19,15 @@ class formController extends Controller
 {
     public function index(){
         $place = placeService::all()->get();
+        $form = formService::getFormByUserId(Auth::user()->id)->get();
 
-        return view('form.index', compact('place'));
+        return view('form.index', compact('place', 'form'));
+    }
+
+    public function detail($formId){
+        $form = formService::getFormById($formId)->first();
+
+        return view('form.detail', compact('form'));
     }
 
     public function create($id){

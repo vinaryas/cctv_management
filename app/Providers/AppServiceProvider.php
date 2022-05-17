@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
             $event->menu->add([
                 'text' => 'Manajemen Otorisasi',
                 'icon' => 'fas fa-user-shield',
+                'permission' => 'cctv-management',
                 'submenu' => [
                     [
                         'text' => 'Role',
@@ -58,6 +59,15 @@ class AppServiceProvider extends ServiceProvider
                 'url' => route('approval.index'),
                 'active' => [route('approval.index')],
                 'icon' => 'fab fa-wpforms',
+                'permission' => 'approve',
+            ]);
+
+            $event->menu->add([
+                'text' => 'IT Approval',
+                'url' => route('it.index'),
+                'active' => [route('it.index')],
+                'icon' => '	fas fa-laptop',
+                'permission' => 'cctv-management',
             ]);
 
         });

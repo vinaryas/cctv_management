@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Approval')
+@section('title', 'IT')
 
 @section('content_header')
-<h1 class="m-0 text-dark"> Approval </h1>
+<h1 class="m-0 text-dark"> IT </h1>
 @stop
 
 @section('content')
-<form class="card" action="{{ route('approval.index') }}" method="GET">
+<form class="card" action="{{ route('it.index') }}" method="GET">
     {{ csrf_field() }}
-     <div class="card-body">
+    <div class="card-body">
         <table class="table table-bordered table-striped" id="table" style="width: 100%;">
             <thead>
                 <tr>
@@ -25,7 +25,7 @@
                         <td>{{ $detail->name }}</td>
                         <td>{{ $detail->nik }}</td>
                         <td>{{ $detail->departemens_name }}</td>
-                        <td> <a href="{{ route('approval.create', $detail->form_id) }}" class="btn btn-primary btn-sm"><i class="fas fa-angle-right"></i> Detail </a> </td>
+                        <td> <a href="{{ route('it.create', $detail->form_id )}}" class="btn btn-primary btn-sm"><i class="fas fa-angle-right"></i> Detail </a> </td>
                     </tr>
                 @endforeach
             </tbody>

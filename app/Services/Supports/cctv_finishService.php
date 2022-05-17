@@ -2,10 +2,10 @@
 
 namespace App\Services\Supports;
 
-use App\Services\form_placeService as SupportService;
+use App\Services\cctv_finishService as SupportService;
 use Illuminate\Support\Facades\Facade;
 
-class form_placeService extends Facade
+class cctv_finishService extends Facade
 {
 	/**
      * Get the registered name of the component.

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class approvalController extends Controller
 {
     public function index(){
-        $form = formService::getDetail()->get();
+        $form = formService::getApproval(Auth::user()->roles->first()->id)->get();
 
         return view('approval.index', compact('form'));
     }
@@ -40,12 +40,9 @@ class approvalController extends Controller
                 $dataUpdate = [
                     'role_last_app' => Auth::user()->id,
                     'role_next_app' => $nextApp,
-                    'status'=>1
                 ];
 
                 $updateStatus = formService::update($dataUpdate, $request->form_id);
-
-                // dd($storeApprove, $dataUpdate, $nextApp, $updateStatus);
 
                 DB::commit();
 
@@ -67,7 +64,7 @@ class approvalController extends Controller
                 $dataUpdate = [
                     'role_last_app' => Auth::user()->id,
                     'role_next_app' => $nextApp,
-                    'status'=>2
+                    'status'=>1
                 ];
 
                 $updateStatus = formService::update($dataUpdate, $storeApprove->form_id);
