@@ -37,15 +37,15 @@
                 <input type="time" name="time_last" id="time" class="form-control">
             <label> Daerah CCTV </label>
             @if ($place->id == 1)
-            <select name="area_id" id="area_id" class="form-control" required>
+            <select name="store_id" id="store_id" class="form-control" required>
                 @foreach ($store as $stores)
                 <option value="{{ $stores->id }}">{{ $stores->name }}</option>
                 @endforeach
             </select>
             @else
-            <select name="area_id" id="area_id" class="form-control" required>
-                @foreach ($areaKantor as $kantor)
-                <option value="{{ $kantor->id }}">{{ $kantor->area }}</option>
+            <select name="bo_id" id="bo_id" class="form-control" required>
+                @foreach ($backOffice as $bo)
+                <option value="{{ $bo->id }}">{{ $bo->name }}</option>
                 @endforeach
             </select>
             @endif

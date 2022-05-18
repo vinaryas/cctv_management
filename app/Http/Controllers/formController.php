@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\store;
-use App\Services\Supports\areaKantorService;
+use App\Services\Supports\backOfficeService;
 use App\Services\Supports\departemenService;
-use App\Services\Supports\form_placeService;
 use App\Services\Supports\formService;
 use App\Services\Supports\placeService;
 use App\Services\Supports\regionService;
@@ -36,7 +34,7 @@ class formController extends Controller
         $region = regionService::all()->get();
         $departemen = departemenService::all()->get();
         $store = storeService::all()->get();
-        $areaKantor = areaKantorService::all()->get();
+        $backOffice = backOfficeService::all()->get();
 
         return view('form.create',
         compact(
@@ -45,43 +43,74 @@ class formController extends Controller
             'region',
             'departemen',
             'store',
-            'areaKantor',
+            'backOffice',
         ));
     }
 
     public function store(Request $request){
-
         DB::beginTransaction();
 
-        try{
-            $form = [
-                'created_by'=>Auth::user()->id,
-                'name'=>$request->name,
-                'nik'=>$request->nik,
-                'region_id'=>$request->region_id,
-                'departemen_id'=>$request->departemen_id,
-                'place_id'=>$request->place_id,
-                'area_id'=>$request->area_id,
-                'date'=>$request->date,
-                'time_first'=>$request->time_first,
-                'time_last'=>$request->time_last,
-                'tempat_cctv'=>$request->tempat_cctv,
-                'description'=>$request->description,
-                'role_last_app' => Auth::user()->roles->first()->id,
-                'role_next_app'=>formService::getNextApp(Auth::user()->roles->first()->id),
-                'status'=>0,
-            ];
+        if($request->place_id == 1){
+            try{
+                $form = [
+                    'created_by'=>Auth::user()->id,
+                    'name'=>$request->name,
+                    'nik'=>$request->nik,
+                    'region_id'=>$request->region_id,
+                    'departemen_id'=>$request->departemen_id,
+                    'place_id'=>$request->place_id,
+                    'store_id'=>$request->store_id,
+                    'date'=>$request->date,
+                    'time_first'=>$request->time_first,
+                    'time_last'=>$request->time_last,
+                    'tempat_cctv'=>$request->tempat_cctv,
+                    'description'=>$request->description,
+                    'role_last_app' => Auth::user()->roles->first()->id,
+                    'role_next_app'=>formService::getNextApp(Auth::user()->roles->first()->id),
+                    'status'=>0,
+                ];
 
-            $storeForm = formService::store($form);
+                $storeForm = formService::store($form);
+                DB::commit();
 
-            DB::commit();
+                return redirect()->route('form.index');
 
-            return redirect()->route('form.index');
+            }catch(\Throwable $th){
+                dd($th);
 
-        }catch(\Throwable $th){
-            dd($th);
+                return redirect()->route('form.index');
+            }
+        }elseif($request->place_id == 2){
+            try{
+                $form = [
+                    'created_by'=>Auth::user()->id,
+                    'name'=>$request->name,
+                    'nik'=>$request->nik,
+                    'region_id'=>$request->region_id,
+                    'departemen_id'=>$request->departemen_id,
+                    'place_id'=>$request->place_id,
+                    'bo_id'=>$request->bo_id,
+                    'date'=>$request->date,
+                    'time_first'=>$request->time_first,
+                    'time_last'=>$request->time_last,
+                    'tempat_cctv'=>$request->tempat_cctv,
+                    'description'=>$request->description,
+                    'role_last_app' => Auth::user()->roles->first()->id,
+                    'role_next_app'=>formService::getNextApp(Auth::user()->roles->first()->id),
+                    'status'=>0,
+                ];
 
-            return redirect()->route('form.index');
+                $storeForm = formService::store($form);
+                DB::commit();
+
+                return redirect()->route('form.index');
+
+            }catch(\Throwable $th){
+                dd($th);
+
+                return redirect()->route('form.index');
+            }
         }
+
     }
 }

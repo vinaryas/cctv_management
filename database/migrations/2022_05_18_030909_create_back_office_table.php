@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAreaKantorTable extends Migration
+class CreateBackOfficeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateAreaKantorTable extends Migration
      */
     public function up()
     {
-        Schema::create('area_kantor', function (Blueprint $table) {
+        Schema::create('back_office', function (Blueprint $table) {
             $table->id();
-            $table->string('area');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateAreaKantorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('area_kantor');
+        Schema::dropIfExists('back_office');
     }
 }

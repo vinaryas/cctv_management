@@ -21,7 +21,8 @@ class CreateFormTable extends Migration
             $table->integer('region_id');
             $table->integer('departemen_id');
             $table->integer('place_id');
-            $table->integer('area_id');
+            $table->integer('store_id')->nullable();
+            $table->integer('bo_id')->nullable();
             $table->date('date');
             $table->time('time_first');
             $table->time('time_last');

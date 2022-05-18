@@ -42,15 +42,16 @@ class formService
         ->join('regions', 'form.region_id', '=', 'regions.id')
         ->join('departemens', 'form.departemen_id', '=', 'departemens.id')
         ->join('place', 'form.place_id', '=', 'place.id')
-        // ->join('stores', 'form.area_id', '=', 'stores.id')
-        // ->join('area_kantor', 'form.area_id', '=', 'area_kantor.id')
+        ->leftjoin('back_office', 'form.bo_id', '=', 'back_office.id')
+        ->leftjoin('stores', 'form.store_id', '=', 'stores.id')
         ->select(
             'form.id as form_id',
             'form.name as name',
             'form.nik as nik',
             'form.tempat_cctv as tempat_cctv',
             'form.description as description',
-            'form.area_id as area_id',
+            'form.store_id as store_id',
+            'form.bo_id as bo_id',
             'form.date as date',
             'form.time_first as time_first',
             'form.time_last as time_last',
@@ -61,7 +62,9 @@ class formService
             'place.place as place',
             'place.id as place_id',
             'regions.id as region_id',
-            'regions.name as regions_name'
+            'regions.name as regions_name',
+            'stores.name as store_name',
+            'back_office.name as bo_name'
         );
 
         return $data;

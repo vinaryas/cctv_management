@@ -2,10 +2,10 @@
 
 namespace App\Services\Supports;
 
-use App\Services\areaKantorService as SupportService;
+use App\Services\backOfficeService as SupportService;
 use Illuminate\Support\Facades\Facade;
 
-class areaKantorService extends Facade
+class backOfficeService extends Facade
 {
 	/**
      * Get the registered name of the component.
