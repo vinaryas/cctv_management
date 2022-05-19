@@ -42,6 +42,22 @@
             @enderror
         </div>
 
+         {{-- nik field --}}
+        <div class="input-group mb-3">
+            <input type="text" name="nik" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}"
+                   value="{{ old('nik') }}" placeholder="NIK" autofocus>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user-shield {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+            @if($errors->has('nik'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('nik') }}</strong>
+                </div>
+            @endif
+        </div>
+
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
@@ -85,13 +101,13 @@
 
 @section('auth_footer')
     {{-- Password reset link --}}
-    @if($password_reset_url)
+    {{-- @if($password_reset_url)
         <p class="my-0">
             <a href="{{ $password_reset_url }}">
                 {{ __('adminlte::adminlte.i_forgot_my_password') }}
             </a>
         </p>
-    @endif
+    @endif --}}
 
     {{-- Register link --}}
     @if($register_url)

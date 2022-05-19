@@ -70,6 +70,13 @@ class AppServiceProvider extends ServiceProvider
                 'permission' => 'cctv-management',
             ]);
 
+            $event->menu->add([
+                'text' => 'History',
+                'url' => route('history.index'),
+                'active' => [route('history.index')],
+                'icon' => '	fas fa-laptop',
+            ]);
+
         });
 
     }

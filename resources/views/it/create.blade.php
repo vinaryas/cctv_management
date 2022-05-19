@@ -37,12 +37,12 @@
             </select>
             <label> Daerah CCTV </label>
             @if ($form->place_id == 1)
-            <select name="area_id" id="area_id" class="form-control" readonly>
-                <option value="{{ $form->area_id }}">{{ $form->area_id }}</option>
+            <select name="store_id" id="store_id" class="form-control" readonly>
+                <option value="{{ $form->store_id }}">{{ $form->store_name }}</option>
             </select>
             @else
-            <select name="area_id" id="area_id" class="form-control" readonly>
-                <option value="{{ $form->area_id }}">{{ $form->area_id }}</option>
+            <select name="bo_id" id="bo_id" class="form-control" readonly>
+                <option value="{{ $form->bo_id }}">{{ $form->bo_name }}</option>
             </select>
             @endif
             <label> Area CCTV </label>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepHeadTable extends Migration
+class CreateVideoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateDepHeadTable extends Migration
      */
     public function up()
     {
-        Schema::create('dep_head', function (Blueprint $table) {
+        Schema::create('video', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('departemen_id')->nullable();
+            $table->integer('file_name')->unique();
             $table->timestamps();
-
-            $table->foreign('departemen_id')->references('id')->on('departemens');
         });
     }
 
@@ -30,6 +27,6 @@ class CreateDepHeadTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dep_head');
+        Schema::dropIfExists('video');
     }
 }

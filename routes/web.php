@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\approvalController;
 use App\Http\Controllers\formController;
+use App\Http\Controllers\historyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\itController;
 use App\Http\Controllers\role_userController;
@@ -49,3 +50,6 @@ Route::group(['middleware' => 'permission:cctv-management'], function (){
     Route::get('/role/user/{id}', [role_userController::class, 'create'])->name('role.create');
     Route::post('/role/user}', [role_userController::class, 'store'])->name('role.store');
 });
+
+Route::get('/history', [historyController::class, 'index'])->name('history.index');
+// Route::get('/CCTV/detail/{id}', [historyController::class, 'detail'])->name('history.detail');
