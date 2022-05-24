@@ -43,6 +43,12 @@ class AppServiceProvider extends ServiceProvider
                         'url' => route('role.index'),
                         'active' => [route('role.index')],
                         'icon' => 'fas fa-bullseye',
+                    ],
+                    [
+                        'text' => 'Departemen Head',
+                        'url' => route('dep_head.index'),
+                        'active' => [route('dep_head.index')],
+                        'icon' => 'fas fa-bullseye',
                     ]
                 ]
             ]);
@@ -74,6 +80,13 @@ class AppServiceProvider extends ServiceProvider
                 'text' => 'History',
                 'url' => route('history.index'),
                 'active' => [route('history.index')],
+                'icon' => '	fas fa-laptop',
+            ]);
+
+            $event->menu->add([
+                'text' => 'tester',
+                'url' => route('books.index'),
+                'active' => [route('books.index')],
                 'icon' => '	fas fa-laptop',
             ]);
 

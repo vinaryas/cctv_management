@@ -23,5 +23,4 @@ class approvalService
         return $this->approval->create($data);
     }
 
-
 }

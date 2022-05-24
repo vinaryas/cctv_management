@@ -25,7 +25,8 @@
                         <td>{{ $detail->created_by }}</td>
                         <td>{{ $detail->approved_by }}</td>
                         <td>{{ $detail->status }}</td>
-                        <td> <a href="" class="btn btn-primary btn-sm"><i class="fas fa-angle-right"></i> Detail </a> </td>
+                        <td><a href="{{ route('video.download', $detail->uuid) }}" class="btn btn-primary btn-sm"><i class="fas fa-file-download"></i> Download  </a></td>
+                        {{-- <td> <a href="" class="btn btn-primary btn-sm"><i class="fas fa-angle-right"></i> Download </a> </td> --}}
                     </tr>
                 @endforeach
             </tbody>

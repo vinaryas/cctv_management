@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Supports\approvalService;
 use App\Services\Supports\formService;
+use App\Services\Supports\userService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,11 @@ use Illuminate\Support\Facades\DB;
 class approvalController extends Controller
 {
     public function index(){
-        $form = formService::getApproval(Auth::user()->roles->first()->id)->get();
+        if(Auth::user()->roles->first()->id != '1'){
+            $form = formService::getApproval(Auth::user()->roles->first()->id, userService::authDepArray())->get();
+        }else{
+            $form = formService::getApproval(Auth::user()->roles->first()->id)->get();
+        }
 
         return view('approval.index', compact('form'));
     }

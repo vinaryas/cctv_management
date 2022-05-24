@@ -94,6 +94,16 @@ class formService
         return $form;
     }
 
+    public function getApproveFilterByDepartemen($roleId, $departemen)
+    {
+        $form = $this->getDetail()
+        ->where('role_next_app', $roleId)
+        ->where('status', 0)
+        ->whereIn('departemen_id', $departemen);
+
+        return $form;
+    }
+
     public function getApprovalForIt()
     {
         $form = $this->getDetail()

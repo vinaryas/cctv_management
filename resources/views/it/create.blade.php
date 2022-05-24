@@ -49,6 +49,8 @@
             <input type="text" name="tempat_cctv" id="tempat_cctv" value="{{ $form->tempat_cctv }}" class="form-control" readonly>
             <label>Keterangan</label>
             <textarea class="form-control form-control-sm" name="description" id="description"  cols="30" rows="10" readonly> {{ $form->description }} </textarea>
+            <label> Upload Video: </label>
+            <input type="file" name="video" class="form-control form-control-sm">
         </div>
         <div class="float-left">
             <a href="{{ route('it.index') }}" class="btn btn-primary"><i class="fas fa-angle-left"></i> <b>Kembali</b> </a>

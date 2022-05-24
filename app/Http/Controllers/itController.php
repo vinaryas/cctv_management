@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\cctv_finish;
 use App\Services\Supports\cctv_finishService;
 use App\Services\Supports\formService;
+use App\Services\Supports\videoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Webpatser\Uuid\Uuid;
 
 class itController extends Controller
 {
@@ -33,10 +36,19 @@ class itController extends Controller
                 'form_id' => $request->form_id,
                 'created_by' => $request->created_by,
                 'approved_by'=>Auth::user()->id,
-                'status' => 'Finish'
+                'status' => 'Finish',
+                'video' => $request->video,
+                'path' => $request->file('video'),
             ];
 
-            $storeApprove = cctv_finishService::store($data);
+            $data['uuid'] = (string)Uuid::generate();
+            if ($request->hasFile('video')) {
+                $data['video'] = $request->video->getClientOriginalName();
+                dd(Storage::putFile('public/cctv_video', $request->file('video')));
+                // $request->video->storeAs('cctv_video', $data['video']);
+            }
+
+            $storeData = cctv_finishService::store($data);
 
             $dataUpdate = [
                 'role_last_app' => Auth::user()->id,
@@ -45,6 +57,8 @@ class itController extends Controller
             ];
 
             $updateStatus = formService::update($dataUpdate, $request->form_id);
+
+
 
             DB::commit();
 

@@ -19,6 +19,9 @@ class CreateCctvFinishTable extends Migration
             $table->integer('created_by');
             $table->integer('approved_by');
             $table->string('status');
+            $table->uuid('uuid')->nullable();
+            $table->string('video')->nullable();
+            $table->string('path')->nullable();
             $table->timestamps();
         });
     }

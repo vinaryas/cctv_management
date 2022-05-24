@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class video extends Model
+class books extends Model
 {
     use HasFactory;
-    protected $table = 'video';
-    protected $guarded = ['video'];
-    protected $fillable = ['file_name'];
+    protected $fillable = ['uuid', 'title', 'cover'];
 }

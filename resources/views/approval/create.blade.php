@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<form class="card" action="{{ route('approval.store') }}" method="POST">
+<form class="card" action="{{ route('approval.store') }}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="card-body">
         <input type="hidden" value="{{ $form->form_id }}" name="form_id" id="form_id">

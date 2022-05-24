@@ -15,11 +15,9 @@ class CreateDepHeadTable extends Migration
     {
         Schema::create('dep_head', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('departemen_id')->nullable();
+            $table->integer('departemen_id');
+            $table->integer('user_id');
             $table->timestamps();
-
-            $table->foreign('departemen_id')->references('id')->on('departemens');
         });
     }
 

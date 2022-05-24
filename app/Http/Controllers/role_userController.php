@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Supports\dep_headService;
 use App\Services\Supports\role_userService;
 use App\Services\Supports\roleService;
 use App\Services\Supports\userService;
@@ -35,7 +36,19 @@ class role_userController extends Controller
                     'user_type'=>'App\Models\User'
                 ];
 
-                $storeData = role_userService::store($data);
+                if($request->role_id == 2){
+                    $storeData = role_userService::store($data);
+
+                    $depHead = [
+                        'user_id'=>$request->user_id,
+                        'departemen_id'=>0,
+                    ];
+
+                    $storeDepHead = dep_headService::store($depHead);
+
+                }else{
+                    $storeData = role_userService::store($data);
+                }
 
                 DB::commit();
 
@@ -71,7 +84,13 @@ class role_userController extends Controller
                     'role_id'=>$role_user->role_id,
                 ];
 
-                $delete = role_userService::delete($data, $request->user_id);
+                if($request->role_id == 2){
+                    $delete = role_userService::delete($data, $request->user_id);
+
+                    $deleteDepHead = dep_headService::delete($request->user_id);
+                }else{
+                    $delete = role_userService::delete($data, $request->user_id);
+                }
 
                 DB::commit();
 

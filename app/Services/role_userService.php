@@ -41,14 +41,17 @@ class role_userService
         ->join('roles', 'role_user.role_id', '=', 'roles.id')
         ->select(
             'users.id as user_id',
+            'users.name as user_name',
             'roles.id as role_id',
+            'roles.display_name as role_name'
         );
 
         return $data;
     }
 
-
-
-
+    public function getDepHead()
+    {
+        return $this-> joinRoleUser()->where('role_id', 2);
+    }
 
 }

@@ -43,7 +43,7 @@
         </div>
 
          {{-- nik field --}}
-        <div class="input-group mb-3">
+        {{-- <div class="input-group mb-3">
             <input type="text" name="nik" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}"
                    value="{{ old('nik') }}" placeholder="NIK" autofocus>
             <div class="input-group-append">
@@ -56,7 +56,7 @@
                     <strong>{{ $errors->first('nik') }}</strong>
                 </div>
             @endif
-        </div>
+        </div> --}}
 
         {{-- Password field --}}
         <div class="input-group mb-3">

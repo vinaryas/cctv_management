@@ -23,4 +23,9 @@ class cctv_finishService
         return $this->cctvFinish->create($data);
     }
 
+    public function getUUID($uuid)
+    {
+        return $this->cctvFinish->where('uuid', $uuid);
+    }
+
 }

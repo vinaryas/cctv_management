@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\approvalController;
+use App\Http\Controllers\bookController;
+use App\Http\Controllers\dep_headController;
 use App\Http\Controllers\formController;
 use App\Http\Controllers\historyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\itController;
 use App\Http\Controllers\role_userController;
+use App\Http\Controllers\videoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,14 +45,23 @@ Route::group(['middleware' => 'permission:approve'], function (){
 Route::group(['middleware' => 'permission:cctv-management'], function (){
     Route::get('/it', [itController::class, 'index'])->name('it.index');
     Route::get('/it/create/{id}', [itController::class, 'create'])->name('it.create');
-    Route::post('/it/store}', [itController::class, 'store'])->name('it.store');
+    Route::post('/it/store', [itController::class, 'store'])->name('it.store');
 });
 
 Route::group(['middleware' => 'permission:cctv-management'], function (){
     Route::get('/role', [role_userController::class, 'index'])->name('role.index');
     Route::get('/role/user/{id}', [role_userController::class, 'create'])->name('role.create');
-    Route::post('/role/user}', [role_userController::class, 'store'])->name('role.store');
+    Route::post('/role/user', [role_userController::class, 'store'])->name('role.store');
 });
 
+Route::get('/dep_head', [dep_headController::class, 'index'])->name('dep_head.index');
+Route::get('/dep_head/{id}', [dep_headController::class, 'create'])->name('dep_head.create');
+Route::post('/dep_head/store', [dep_headController::class, 'store'])->name('dep_head.store');
+
 Route::get('/history', [historyController::class, 'index'])->name('history.index');
-// Route::get('/CCTV/detail/{id}', [historyController::class, 'detail'])->name('history.detail');
+Route::get('/video/{uuid}/download', [historyController::class, 'download'])->name('video.download');
+
+Route::get('books/index', [bookController::class, 'index'])->name('books.index');
+Route::get('books/create', [bookController::class, 'create'])->name('books.create');
+Route::post('books/store', [bookController::class, 'store'])->name('books.store');
+Route::get('books/{uuid}/download', [bookController::class, 'download'])->name('books.download');
