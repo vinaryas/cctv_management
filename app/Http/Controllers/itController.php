@@ -35,17 +35,18 @@ class itController extends Controller
             $data = [
                 'form_id' => $request->form_id,
                 'created_by' => $request->created_by,
+                'created_name'=>$request->name,
                 'approved_by'=>Auth::user()->id,
+                'approved_name'=>Auth::user()->name,
                 'status' => 'Finish',
                 'video' => $request->video,
-                'path' => $request->file('video'),
+                'path' =>  'xampp/htdocs/cctv/storage/app/cctv_video/',
             ];
 
             $data['uuid'] = (string)Uuid::generate();
             if ($request->hasFile('video')) {
                 $data['video'] = $request->video->getClientOriginalName();
-                dd(Storage::putFile('public/cctv_video', $request->file('video')));
-                // $request->video->storeAs('cctv_video', $data['video']);
+                $request->video->storeAs('cctv_video', $data['video']);
             }
 
             $storeData = cctv_finishService::store($data);
@@ -58,12 +59,11 @@ class itController extends Controller
 
             $updateStatus = formService::update($dataUpdate, $request->form_id);
 
-
-
             DB::commit();
 
             return redirect()->route('it.index');
         }catch(\Throwable $th){
+            dd($th->getMessage());
             return redirect()->route('it.index');
         }
 

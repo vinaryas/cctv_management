@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\DB;
 class approvalController extends Controller
 {
     public function index(){
-        if(Auth::user()->roles->first()->id != '1'){
-            $form = formService::getApproval(Auth::user()->roles->first()->id, userService::authDepArray())->get();
+        if(Auth::user()->roles->first()->id == '1'){
+            $form = formService::getApproveFilterByDepartemen(Auth::user()->roles->first()->id,  UserService::authDepArray())->get();
         }else{
             $form = formService::getApproval(Auth::user()->roles->first()->id)->get();
         }

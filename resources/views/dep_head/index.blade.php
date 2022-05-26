@@ -22,8 +22,8 @@
                 @foreach ($user as $detail)
                     <tr>
                         <td>{{ $detail->user_name }}</td>
-                        {{-- <td>{{ $detail->departemen_name }}</td> --}}
-                        <td> <a href="{{ route('dep_head.create', $detail->user_id) }}" class="btn btn-primary btn-sm"><i class="fas fa-angle-right"></i> Detail </a> </td>
+                        <td> <a href="{{ route('dep_head.detail', $detail->user_id) }}" class="btn btn-info btn-sm"> Detail <i class="fas fa-info-circle"></i> </a>   </td>
+                        <td> <a href="{{ route('dep_head.create', $detail->user_id) }}" class="btn btn-primary btn-sm"> Select Departemen <i class="fas fa-angle-right"></i> </a> </td>
                     </tr>
                 @endforeach
             </tbody>

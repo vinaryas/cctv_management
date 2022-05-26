@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\dep_head;
 use App\Services\Supports\dep_headService;
 use App\Services\Supports\departemenService;
 use App\Services\Supports\role_userService;
@@ -27,34 +28,42 @@ class dep_headController extends Controller
     public function store(Request $request){
         DB::beginTransaction();
 
-        if(isset($_POST["store"])){
-            try{
-                $data =[
-                    'departemen_id' =>$request->departemen_id,
-                    'user_id' =>$request->user_id,
-                ];
-                $saveData = dep_headService::store($data, $request->user_id);
+        try{
+            $data =[
+                'departemen_id' =>$request->departemen_id,
+                'user_id' =>$request->user_id,
+            ];
+            $saveData = dep_headService::store($data, $request->user_id);
 
-                DB::commit();
+            DB::commit();
 
-                return redirect()->route('dep_head.index');
-            }catch(\Throwable $th){
-                dd($th);
-                return redirect()->route('dep_head.index');
-            }
-        }elseif(isset($_POST["delete"])){
-            try{
-                $deleteData = dep_headService::delete($request->user_id);
-
-                DB::commit();
-
-                return redirect()->route('dep_head.index');
-            }catch(\Throwable $th){
-                dd($th);
-                return redirect()->route('dep_head.index');
-            }
+            return redirect()->route('dep_head.index');
+        }catch(\Throwable $th){
+            dd($th);
+            return redirect()->route('dep_head.index');
         }
+    }
 
+    public function detail($userId){
+        $user = dep_headService::getUserById($userId)->first();
+
+        return view('dep_head.detail', compact('user'));
+    }
+
+    public function delete(Request $request){
+        DB::beginTransaction();
+
+        try{
+            $deleteData = dep_headService::delete($request->user_id, $request->departemen_id);
+
+            DB::commit();
+
+            return redirect()->route('dep_head.index');
+        }catch(\Throwable $th){
+            dd($th);
+            return redirect()->route('dep_head.index');
+        }
     }
 
 }
+

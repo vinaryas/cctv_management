@@ -26,11 +26,11 @@ class userService
 
     public function authDepArray()
     {
-        $departemen = [];
+        $departemens = [];
         foreach (Auth::user()->departemens as $departemen) {
-            $departemen[] = $departemen->id;
+            $departemens[] = $departemen->id;
         }
 
-        return $departemen;
+        return $departemens;
     }
 }

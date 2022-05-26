@@ -20,7 +20,7 @@ class historyController extends Controller
     public function download($uuid)
     {
         $video = cctv_finishService::getUUID($uuid)->firstOrFail();
-        $pathToFile = storage_path('public/storage/cctv_video/' . $video->path);
+        $pathToFile = storage_path('app\cctv_video\\'. $video->video);
         return response()->download($pathToFile);
     }
 }

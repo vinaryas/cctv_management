@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<form class="card" action="{{ route('it.index') }}" method="GET">
+<form class="card" action="{{ route('it.index') }}" method="GET" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="card-body">
         <table class="table table-bordered table-striped" id="table" style="width: 100%;">

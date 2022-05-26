@@ -83,13 +83,6 @@ class AppServiceProvider extends ServiceProvider
                 'icon' => '	fas fa-laptop',
             ]);
 
-            $event->menu->add([
-                'text' => 'tester',
-                'url' => route('books.index'),
-                'active' => [route('books.index')],
-                'icon' => '	fas fa-laptop',
-            ]);
-
         });
 
     }

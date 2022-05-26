@@ -55,13 +55,11 @@ Route::group(['middleware' => 'permission:cctv-management'], function (){
 });
 
 Route::get('/dep_head', [dep_headController::class, 'index'])->name('dep_head.index');
+Route::get('/dep_head/detail/{id}', [dep_headController::class, 'detail'])->name('dep_head.detail');
+Route::post('/dep_head/delete/', [dep_headController::class, 'delete'])->name('dep_head.delete');
 Route::get('/dep_head/{id}', [dep_headController::class, 'create'])->name('dep_head.create');
 Route::post('/dep_head/store', [dep_headController::class, 'store'])->name('dep_head.store');
 
 Route::get('/history', [historyController::class, 'index'])->name('history.index');
 Route::get('/video/{uuid}/download', [historyController::class, 'download'])->name('video.download');
 
-Route::get('books/index', [bookController::class, 'index'])->name('books.index');
-Route::get('books/create', [bookController::class, 'create'])->name('books.create');
-Route::post('books/store', [bookController::class, 'store'])->name('books.store');
-Route::get('books/{uuid}/download', [bookController::class, 'download'])->name('books.download');

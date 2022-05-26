@@ -25,11 +25,8 @@
             <a href="{{ route('dep_head.index') }}" class="btn btn-primary"><i class="fas fa-angle-left"></i> <b>Kembali</b> </a>
         </div>
         <div class="float-right">
-            <button type="submit" class="btn btn-danger" name="delete" id="delete">
-                <i class="fas fa-times"></i> Delete
-            </button>
             <button type="submit" class="btn btn-success" name="store" id="store">
-                <i class="fas fa-save"></i> Store
+                <i class="fas fa-save"></i> Simpan
             </button>
         </div>
     </div>

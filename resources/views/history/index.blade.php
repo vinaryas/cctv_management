@@ -7,23 +7,25 @@
 @stop
 
 @section('content')
-<form class="card" action="{{ route('history.index') }}" method="GET">
+<form class="card" action="{{ route('history.index') }}" method="GET" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="card-body">
         <table class="table table-bordered table-striped" id="table" style="width: 100%;">
             <thead>
                 <tr>
+                    <th> Tgl finish </th>
                     <th> created_by </th>
                     <th> approved_by </th>
                     <th> status </th>
-                    <th> detail </th>
+                    <th> File </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $detail)
                     <tr>
-                        <td>{{ $detail->created_by }}</td>
-                        <td>{{ $detail->approved_by }}</td>
+                        <td>{{ $detail->created_at }}</td>
+                        <td>{{ $detail->created_name }}</td>
+                        <td>{{ $detail->approved_name }}</td>
                         <td>{{ $detail->status }}</td>
                         <td><a href="{{ route('video.download', $detail->uuid) }}" class="btn btn-primary btn-sm"><i class="fas fa-file-download"></i> Download  </a></td>
                         {{-- <td> <a href="" class="btn btn-primary btn-sm"><i class="fas fa-angle-right"></i> Download </a> </td> --}}

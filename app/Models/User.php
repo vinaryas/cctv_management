@@ -61,4 +61,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Role::class,'id', 'role_id' );
     }
+
+    public function departemens()
+    {
+        return $this->hasManyThrough('App\Models\departemens', 'App\Models\dep_head', 'user_id', 'id', 'id', 'departemen_id');
+    }
+
+    public function depHead()
+    {
+        return $this->hasOne(dep_head::class, 'user_id', 'id');
+    }
 }

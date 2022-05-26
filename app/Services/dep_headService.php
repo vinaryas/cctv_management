@@ -29,12 +29,12 @@ class dep_headService
 		return $this->dep_head->where('id', $id)->update($data);
 	}
 
-    public function delete($data)
+    public function delete($userId, $departemenId)
     {
-    	return $this->dep_head->where('id', $data['id'])->delete();
+    	return $this->dep_head->where('user_id', $userId)->where('departemen_id', $departemenId)->delete();
     }
 
-    public function joinRoleDephead()
+    public function getDetail()
     {
         $data = DB::table('dep_head')
         ->join('users', 'dep_head.user_id', '=', 'users.id')
@@ -48,5 +48,10 @@ class dep_headService
         );
 
         return $data;
+    }
+
+    public function getUserById($userId)
+    {
+        return $this->getDetail()->where('user_id', $userId);
     }
 }
