@@ -92,6 +92,63 @@
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
 
+    @include('sweetalert::alert')
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                placeholder: "...",
+                allowClear: true
+            });
+        });
+
+        function toast(data, modal_id = ''){
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: data.position,
+                showConfirmButton: false,
+                timer: 10000,
+                timerProgressBar: true,
+                onOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: data.icon,
+                title: data.text
+            })
+
+            if (modal_id) {
+                $('#'+modal_id).modal('hide');
+            }
+        }
+
+        function alert(data){
+            toast({
+                'success': true,
+                'heading': 'Success',
+                'text': data.text,
+                'showHideTransition': true,
+                'icon': data.icon,
+                'position': 'top-end',
+                'data': null,
+            });
+        }
+
+        function setSelectedSelect2(select, data, id = 'id', text = 'name') {
+            if (Array.isArray(data)) {
+                $.each(data, function(index, val) {
+                    $('#'+select).append('<option value="'+val[id]+'" selected="selected">'+val[id]+' - '+val[text]+'</option>');
+                });
+            }else{
+                $('#'+select).append('<option value="'+data[id]+'" selected="selected">'+data[id]+' - '+data[text]+'</option>');
+            }
+        }
+
+    </script>
+
     {{-- Livewire Script --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)

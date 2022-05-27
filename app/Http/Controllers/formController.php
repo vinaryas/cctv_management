@@ -9,9 +9,13 @@ use App\Services\Supports\placeService;
 use App\Services\Supports\regionService;
 use App\Services\Supports\storeService;
 use App\Services\Supports\userService;
+use Carbon\Carbon;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+//use JeroenNoten\LaravelAdminLte\View\Components\Widget\Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class formController extends Controller
 {
@@ -49,6 +53,7 @@ class formController extends Controller
 
     public function store(Request $request){
         DB::beginTransaction();
+        $maxDateReq = Carbon::now()->addDays(-14)->format('Y-m-d');
 
         if($request->place_id == 1){
             try{
@@ -70,7 +75,13 @@ class formController extends Controller
                     'status'=>0,
                 ];
 
-                $storeForm = formService::store($form);
+                if($request->date < $maxDateReq){
+                    Alert::error('Error','Tanggal Terlalu Jauh');
+                    return redirect()->back();
+                }else{
+                    $storeForm = formService::store($form);
+                }
+
                 DB::commit();
 
                 return redirect()->route('form.index');
@@ -100,7 +111,13 @@ class formController extends Controller
                     'status'=>0,
                 ];
 
-                $storeForm = formService::store($form);
+                if($request->date < $maxDateReq){
+                    Alert::error('Error','Tanggal Terlalu Jauh');
+                    return redirect()->back();
+                }else{
+                    $storeForm = formService::store($form);
+                }
+
                 DB::commit();
 
                 return redirect()->route('form.index');

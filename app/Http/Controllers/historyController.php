@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\books;
-use App\Models\cctv_finish;
 use App\Services\Supports\cctv_finishService;
-use App\Services\Supports\videoService;
-use Illuminate\Http\Request;
 
 class historyController extends Controller
 {
     public function index(){
         $data = cctv_finishService::all()->get();
-        $books = books::all();
 
-        return view('history.index', compact('data', 'books'));
+        return view('history.index', compact('data'));
     }
 
     public function download($uuid)

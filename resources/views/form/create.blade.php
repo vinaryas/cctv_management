@@ -17,13 +17,13 @@
             <label>NIK</label>
             <input type="text" value="{{ $user->nik }}" id="nik" name="nik" class="form-control" readonly>
             <label>Region</label>
-            <select name="region_id" id="region_id" class="form-control" required>
+            <select name="region_id" id="region_id" class="select2 form-control" required>
                 @foreach ($region as $regions)
                 <option value="{{ $regions->id }}">{{ $regions->name }}</option>
                 @endforeach
             </select>
             <label>Departemen</label>
-            <select name="departemen_id" id="departemen_id" class="form-control" required>
+            <select name="departemen_id" id="departemen_id" class="select2 form-control " required>
                 @foreach ($departemen as $departemens)
                 <option value="{{ $departemens->id }}">{{ $departemens->name }}</option>
                 @endforeach
@@ -37,13 +37,13 @@
                 <input type="time" name="time_last" id="time" class="form-control">
             <label> Daerah CCTV </label>
             @if ($place->id == 1)
-            <select name="store_id" id="store_id" class="form-control" required>
+            <select name="store_id" id="store_id" class="select2 form-control" required>
                 @foreach ($store as $stores)
                 <option value="{{ $stores->id }}">{{ $stores->name }}</option>
                 @endforeach
             </select>
             @else
-            <select name="bo_id" id="bo_id" class="form-control" required>
+            <select name="bo_id" id="bo_id" class="select2 form-control" required>
                 @foreach ($backOffice as $bo)
                 <option value="{{ $bo->id }}">{{ $bo->name }}</option>
                 @endforeach
